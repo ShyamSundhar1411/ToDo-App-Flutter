@@ -11,8 +11,5 @@ class ToDo with ChangeNotifier {
       required this.title,
       isCompleted = false,
       required this.isImportant,
-      required this.creationDate
-    });
-  
-  
+      required this.creationDate});
 }

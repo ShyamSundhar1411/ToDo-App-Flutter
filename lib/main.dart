@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => ToDoContainerProvider()),
+        ChangeNotifierProvider(create: (ctx) => ToDoContainerProvider(),
+        ),
       ],
       child: MaterialApp(
         title: "Todo App",

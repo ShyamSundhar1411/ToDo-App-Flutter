@@ -7,4 +7,16 @@ class ToDoContainerProvider with ChangeNotifier {
   List<ToDo> get getToDos {
     return [..._todoitems];
   }
+
+  void deleteToDo(String id) {
+    _todoitems.remove(id);
+    notifyListeners();
+  }
+  int get completedToDos{
+    return _todoitems.where((element) => element.isCompleted == true).length;
+  }
+
+  int get totalToDos {
+    return _todoitems.length;
+  }
 }
