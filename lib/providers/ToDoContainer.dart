@@ -5,11 +5,11 @@ import './TodoProvider.dart';
 class ToDoContainerProvider with ChangeNotifier {
   List<ToDo> _todoitems = DUMMY_DATA;
   List<ToDo> get getToDos {
-    return [..._todoitems];
+    return _todoitems;
   }
 
   void deleteToDo(String id) {
-    _todoitems.remove(id);
+    _todoitems.removeWhere((element)=>element.id==id);
     notifyListeners();
   }
   int get completedToDos{

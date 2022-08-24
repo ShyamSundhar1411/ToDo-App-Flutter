@@ -5,13 +5,12 @@ import '../providers/TodoProvider.dart';
 
 class ToDoDisplayWidget extends StatelessWidget {
   final ToDo todo;
-  final String id;
-  ToDoDisplayWidget(this.todo,this.id);
+  ToDoDisplayWidget(this.todo);
   @override
   Widget build(BuildContext context) {
-    final todoContainer = Provider.of<ToDoContainerProvider>(context,listen: false);
+    final todoContainer = Provider.of<ToDoContainerProvider>(context);
     return Dismissible(
-      key: ValueKey(id),
+      key: ValueKey(todo.id),
       background: Container(
         color: Theme.of(context).errorColor,
         child: Icon(
@@ -39,8 +38,6 @@ class ToDoDisplayWidget extends StatelessWidget {
           print("Done");
         } else {
           todoContainer.deleteToDo(todo.id);
-          print("Deleted");
-          print(todoContainer.getToDos);
         }
       },
       child: Card(

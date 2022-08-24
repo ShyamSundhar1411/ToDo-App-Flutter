@@ -15,7 +15,7 @@ class TodoDisplayScreen extends StatelessWidget {
         body:Container(
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return ToDoDisplayWidget(todoData[index],todoData[index].id);
+                  return ToDoDisplayWidget(todoData[index]);
                 },
                 itemCount: todoData.length,
               ),
