@@ -35,7 +35,7 @@ class ToDoDisplayWidget extends StatelessWidget {
       ),
       onDismissed: (direction) {
         if (direction == DismissDirection.endToStart) {
-          print("Done");
+          todoContainer.toggleIsCompleted(todo.id);
         } else {
           todoContainer.deleteToDo(todo.id);
         }
