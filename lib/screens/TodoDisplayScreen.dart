@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/widgets/todoDisplayWidget.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/todoDisplayWidget.dart';
 import '../providers/ToDoContainer.dart';
 
 enum FilterOptions {
@@ -9,6 +10,7 @@ enum FilterOptions {
 }
 
 class TodoDisplayScreen extends StatefulWidget {
+  static const routeName = '/';
   @override
   State<TodoDisplayScreen> createState() => _TodoDisplayScreenState();
 }
@@ -18,7 +20,9 @@ class _TodoDisplayScreenState extends State<TodoDisplayScreen> {
   @override
   Widget build(BuildContext context) {
     final todoContainer = Provider.of<ToDoContainerProvider>(context);
-    final todoData = (_showOnlyImportant)?todoContainer.getImportantToDos:todoContainer.getToDos;
+    final todoData = (_showOnlyImportant)
+        ? todoContainer.getImportantToDos
+        : todoContainer.getToDos;
     return Scaffold(
       appBar: AppBar(title: Text("My Todo"), actions: [
         PopupMenuButton(
@@ -38,6 +42,7 @@ class _TodoDisplayScreenState extends State<TodoDisplayScreen> {
                       child: Text("Show All"), value: FilterOptions.All),
                 ])
       ]),
+      drawer: AppDrawer(),
       body: Container(
         child: ListView.builder(
           itemBuilder: (context, index) {
