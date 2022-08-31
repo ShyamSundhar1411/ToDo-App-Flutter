@@ -13,8 +13,22 @@ class ToDoContainerProvider with ChangeNotifier {
     return _todoitems.where((element) => element.isImportant == true).toList();
   }
 
+  List<ToDo> get getCompletedToDos {
+    return _completedtodoitems.toList();
+  }
+
   void deleteToDo(String id) {
     _todoitems.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
+
+  void addItem(String title, bool isImportant) {
+    final newTodo = ToDo(
+        id: DateTime.now().toString(),
+        title: title,
+        isImportant: isImportant,
+        creationDate: DateTime.now());
+    _todoitems.add(newTodo);
     notifyListeners();
   }
 

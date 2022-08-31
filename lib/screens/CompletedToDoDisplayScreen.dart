@@ -1,19 +1,25 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
-import 'package:todo_app/widgets/app_drawer.dart';
+import '../providers/ToDoContainer.dart';
+import '../widgets/app_drawer.dart';
+import 'package:provider/provider.dart';
+import '../widgets/completedToDoDisplayWidget.dart';
 
 class CompletedToDoDisplayScreen extends StatelessWidget {
   static const routeName = '/completed/todos';
   @override
   Widget build(BuildContext context) {
+    final todoContainer = Provider.of<ToDoContainerProvider>(context);
+    final todoData = todoContainer.getCompletedToDos;
     return Scaffold(
-      appBar: AppBar(title:Text("Completed ToDos")),
-      body:Container(child: Center(child:Text("Test")),
-      ),
-      drawer: AppDrawer()
-
-    );
+        appBar: AppBar(title: Text("Completed ToDos")),
+        body: Container(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return CompletedToDoDisplayWidget(todoData[index]);
+            },
+            itemCount: todoData.length,
+          ),
+        ),
+        drawer: AppDrawer());
   }
 }
