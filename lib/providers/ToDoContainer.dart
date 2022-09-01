@@ -44,11 +44,33 @@ class ToDoContainerProvider with ChangeNotifier {
     return _todoitems.firstWhere((element) => element.id == id);
   }
 
+  void removeCompletedTodo(String id) {
+    _completedtodoitems.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
+
   void toggleIsCompleted(String id) {
     ToDo todo = _todoitems.firstWhere((element) => element.id == id);
     todo.isCompleted = !(todo.isCompleted);
     _todoitems.removeWhere((element) => element.id == id);
     _completedtodoitems.add(todo);
+    notifyListeners();
+  }
+
+  void toggleReComplete(String id) {
+    ToDo todo = _completedtodoitems.firstWhere((element) => element.id == id);
+    todo.isCompleted = !(todo.isCompleted);
+    _completedtodoitems.removeWhere((element) => element.id == id);
+    _todoitems.add(todo);
+    notifyListeners();
+  }
+
+  void clearContainer() {
+    _todoitems = [];
+    notifyListeners();
+  }
+  void clearCompletedContainer() {
+    _completedtodoitems = [];
     notifyListeners();
   }
 }

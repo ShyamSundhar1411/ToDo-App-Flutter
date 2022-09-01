@@ -5,10 +5,7 @@ import '../widgets/app_drawer.dart';
 import '../widgets/todoDisplayWidget.dart';
 import '../providers/ToDoContainer.dart';
 
-enum FilterOptions {
-  Important,
-  All,
-}
+enum FilterOptions { Important, All, Clear }
 
 class TodoDisplayScreen extends StatefulWidget {
   static const routeName = '/';
@@ -48,6 +45,8 @@ class _TodoDisplayScreenState extends State<TodoDisplayScreen> {
               setState(() {
                 if (selectedValue == FilterOptions.Important) {
                   _showOnlyImportant = true;
+                } else if (selectedValue == FilterOptions.Clear) {
+                  todoContainer.clearContainer();
                 } else {
                   _showOnlyImportant = false;
                 }
@@ -58,6 +57,8 @@ class _TodoDisplayScreenState extends State<TodoDisplayScreen> {
                       child: Text("Important"), value: FilterOptions.Important),
                   PopupMenuItem(
                       child: Text("Show All"), value: FilterOptions.All),
+                  PopupMenuItem(
+                      child: Text("Clear"), value: FilterOptions.Clear),
                 ])
       ]),
       drawer: AppDrawer(),

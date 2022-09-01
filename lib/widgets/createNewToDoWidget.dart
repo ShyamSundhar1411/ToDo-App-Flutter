@@ -53,13 +53,11 @@ class _NewToDoState extends State<NewToDo> {
               ),
               Container(
                   alignment: Alignment.centerLeft,
-                  child: RaisedButton(
+                  child: TextButton(
                     onPressed: () {
                       _submitData();
                     },
-                    color: Theme.of(context).primaryColorDark,
                     child: Text("Add To Do"),
-                    textColor: Colors.white,
                   ))
             ],
           )),

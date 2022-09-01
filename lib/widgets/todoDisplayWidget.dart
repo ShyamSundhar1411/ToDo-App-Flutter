@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/ToDoContainer.dart';
 import '../providers/TodoProvider.dart';
@@ -9,6 +10,9 @@ class ToDoDisplayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoContainer = Provider.of<ToDoContainerProvider>(context);
+    final String formattedDate =
+        DateFormat('dd MMM, yyyy').format(todo.creationDate);
+    final String formattedTime = DateFormat('hh:mm a').format(todo.creationDate);
     return Dismissible(
       key: ValueKey(todo.id),
       background: Container(
@@ -48,9 +52,17 @@ class ToDoDisplayWidget extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.all(8),
                     child: FittedBox(child: Text("${todo.title[0]}")))),
-            title: Text("${todo.title}"),
-            subtitle: Text("${todo.creationDate}")),
-      ),
+            title: Text("${todo.title}",style: TextStyle(color: (todo.isImportant)?Colors.green:Colors.black),),
+            subtitle: Text.rich(
+              TextSpan(children: [
+                WidgetSpan(child:Icon(Icons.calendar_month_sharp,size:17)),
+                TextSpan(text:"${formattedDate}"),
+                WidgetSpan(child:SizedBox(width: 25,)),
+                WidgetSpan(child:Icon(Icons.alarm,size:17)),
+                TextSpan(text:"${formattedTime}")
+              ])
+            )
+      )),
     );
   }
 }
