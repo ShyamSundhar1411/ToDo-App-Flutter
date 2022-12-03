@@ -56,9 +56,21 @@ func addtodoHandler(context *gin.Context){
 	context.IndentedJSON(http.StatusCreated,newTodo)
 
 }
+func getTodoByIdHandler(context *gin.Context){
+	id:=context.Param("id")
+	for _,item:=range todos{
+		if item.Id == id{
+			context.IndentedJSON(http.StatusOK,item)
+			return
+		}
+	}
+	context.IndentedJSON(http.StatusNotFound,gin.H{"message":"ToDo Not Found"})
+}
+
 func main(){
 	router := gin.Default()
 	router.GET("/todos",todoHandler)
 	router.POST("/todos/create",addtodoHandler)
+	router.GET("/todo/:id",getTodoByIdHandler)
 	router.Run(":5000")
 }
